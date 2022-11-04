@@ -1,2 +1,2 @@
-# NewsBlogProject
+# newsblogproject
 News Blog
