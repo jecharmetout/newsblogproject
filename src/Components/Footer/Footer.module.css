@@ -1,0 +1,42 @@
+.footerWrapper {
+  width: 100%;
+}
+
+.footerContent {
+  max-width: 1120px;
+  padding: 34px 0;
+  margin: 0 auto;
+  border-top: 1px solid rgba(49, 48, 55, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.footerContent > div {
+  color: #31303780;
+}
+
+
+.switchWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.switchWrapper .switchLabel {
+  color: #31303780;
+}
+.darkContainer .footerContent {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.darkContainer .footerContent > div {
+  color: rgba(255, 255, 255, 0.5);
+
+}
+.darkContainer .switchWrapper .switchLabel{
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+}

@@ -6,15 +6,14 @@ import { LabelProps } from "./types";
 
 // import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 
-
-const Label: FC<LabelProps> = ({ title, required}) => {
+const Label: FC<LabelProps> = ({ title, required, className }) => {
   // const { theme } = useThemeContext();
 
   return (
     <div
-      className={classNames(styles.label, {
+      className={classNames(styles.label, className, {
         // [styles.darkContainer]: theme === Theme.Dark,
-        [styles.required]: required,
+        [styles.required]: required
       })}
     >
       {title}
