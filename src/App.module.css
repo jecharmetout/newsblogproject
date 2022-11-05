@@ -1,7 +1,23 @@
-.container {
+.container{
   padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+
+}
+.containerBtn {
+    width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+.containerTabs {
+    width: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
