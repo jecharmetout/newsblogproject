@@ -1,0 +1,67 @@
+.switchWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+}
+.toggleSwitch input[type="checkbox"] {
+  display: none;
+}
+.toggleSwitch .switch {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 25px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.2s ease;
+}
+
+.toggleSwitch .switch::before {
+  position: absolute;
+  content: "";
+  left: 2px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggleSwitch input[type="checkbox"]:checked + .switch::before {
+  transform: translateX(12px);
+  background-color: #ffffff;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch {
+  background-color: #6c1bdb;
+}
+/* hover */
+.toggleSwitch .switch:hover {
+  background-color: #31303780;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch:hover {
+  background-color: #912ef2;
+}
+/* disabled */
+.toggleSwitch input[type="checkbox"]:disabled + .switch {
+  background-color: rgba(49, 48, 55, 0.3);
+}
+.toggleSwitch input[type="checkbox"]:disabled + .switch::before {
+  background-color: rgba(49, 48, 55, 0.1);
+}
+.toggleSwitch input[type="checkbox"]:checked:disabled + .switch {
+  background-color: #6c1bdb;
+}
+.toggleSwitch input[type="checkbox"]:checked:disabled + .switch::before {
+  background-color: #912ef2;
+}

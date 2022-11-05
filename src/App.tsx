@@ -4,6 +4,7 @@ import styles from "./App.module.css";
 import { TabsNames } from "./Utils";
 import Button, { ButtonType } from "./Components/Button";
 import Tabs from "./Components/Tabs";
+import Switch from "./Components/Switch";
 
 const App = () => {
   const activeTab = TabsNames.Articles;
@@ -36,8 +37,14 @@ const App = () => {
           disabled={true}
         />
       </div>
-      <div className={styles.containerTabs}></div>
-      <Tabs tabs={tabs} onClick={() => {}} activeTab={activeTab} />
+      <div className={styles.containerTabs}>
+        <Tabs tabs={tabs} onClick={() => {}} activeTab={activeTab} />
+      </div>
+      <div className={styles.containerSwitch}>
+        <Switch disabled={true} title={"Dark theme"}/>
+        <Switch disabled={false} title={"Dark theme"}/>
+        <Switch disabled={true} title={"Dark theme"}/>
+      </div>
     </div>
   );
 };
