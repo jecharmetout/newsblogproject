@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styles from "./App.module.css";
 
-import { TabsNames } from "./Utils";
+import { SortOrder, TabsNames } from "./Utils";
 import Button, { ButtonType } from "./Components/Button";
 import Tabs from "./Components/Tabs";
 import Switch from "./Components/Switch";
 import Input from "./Components/Input";
 import Footer from "./Components/Footer";
+import Select from "./Components/Select";
 
 const App = () => {
   const activeTab = TabsNames.Articles;
@@ -27,13 +28,33 @@ const App = () => {
       disabled: false
     }
   ];
+  const options = [
+    {
+      key: SortOrder.TitleAToZ,
+      title: "Title (A-Z)",
+      value: SortOrder.TitleAToZ,
+
+    },
+    {
+      key: SortOrder.TitleZtoA,
+      title: "Title (Z-A)",
+      value: SortOrder.TitleZtoA,
+
+    },
+
+  ];
   const [value, setValue] = useState<string>("");
 
   const onChange = (inputValue: string) => {
     setValue(inputValue);
   };
+  const [order, setOrder] = useState(SortOrder.TitleAToZ);
+
   return (
     <div className={styles.container}>
+      <div className={styles.containerSelect}>
+      <Select selectValue={order}  onChange={(event: any) => setOrder(event.target.value)} options={options}/>
+      </div>
       <div className={styles.containerBtn}>
         <Button title={"Primary"} type={ButtonType.Primary} />
         <Button title={"Secondary"} type={ButtonType.Secondary} />

@@ -6,7 +6,7 @@ import { LabelProps } from "./types";
 
 // import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 
-const Label: FC<LabelProps> = ({ title, required, className }) => {
+const Label: FC<LabelProps> = ({ title, required, className,children }) => {
   // const { theme } = useThemeContext();
 
   return (
@@ -17,6 +17,7 @@ const Label: FC<LabelProps> = ({ title, required, className }) => {
       })}
     >
       {title}
+      {children}
     </div>
   );
 };

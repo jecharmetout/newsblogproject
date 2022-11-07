@@ -5,6 +5,15 @@
   align-items: center;
   justify-content: center;
 }
+.containerSelect {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  gap: 15px;
+}
 .containerBtn {
   width: 100%;
   display: flex;
