@@ -8,6 +8,8 @@ import Switch from "./Components/Switch";
 import Input from "./Components/Input";
 import Footer from "./Components/Footer";
 import Select from "./Components/Select";
+import Navbar from "./Components/Navbar";
+
 
 const App = () => {
   const activeTab = TabsNames.Articles;
@@ -32,16 +34,13 @@ const App = () => {
     {
       key: SortOrder.TitleAToZ,
       title: "Title (A-Z)",
-      value: SortOrder.TitleAToZ,
-
+      value: SortOrder.TitleAToZ
     },
     {
       key: SortOrder.TitleZtoA,
       title: "Title (Z-A)",
-      value: SortOrder.TitleZtoA,
-
-    },
-
+      value: SortOrder.TitleZtoA
+    }
   ];
   const [value, setValue] = useState<string>("");
 
@@ -49,11 +48,17 @@ const App = () => {
     setValue(inputValue);
   };
   const [order, setOrder] = useState(SortOrder.TitleAToZ);
+  const [isOpened, setOpened] = useState(false);
 
   return (
     <div className={styles.container}>
+      <Navbar onClick={() => setOpened(!isOpened)} isOpened={isOpened} />
       <div className={styles.containerSelect}>
-      <Select selectValue={order}  onChange={(event: any) => setOrder(event.target.value)} options={options}/>
+        <Select
+          selectValue={order}
+          onChange={(event: any) => setOrder(event.target.value)}
+          options={options}
+        />
       </div>
       <div className={styles.containerBtn}>
         <Button title={"Primary"} type={ButtonType.Primary} />
@@ -69,8 +74,8 @@ const App = () => {
         <Tabs tabs={tabs} onClick={() => {}} activeTab={activeTab} />
       </div>
       <div className={styles.containerSwitch}>
-        <Switch disabled={true}  />
-        <Switch disabled={false}  />
+        <Switch disabled={true} />
+        <Switch disabled={false} />
         <Switch disabled={true} switched={true} />
       </div>
       <div className={styles.containerInput}>
