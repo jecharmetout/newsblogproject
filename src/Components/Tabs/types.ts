@@ -10,5 +10,5 @@ export type TabsProps = {
   tabs: Array<TabsNameArray>;
   // onClick?: (id: TabsNames) => void;
   onClick?: () => void;
-  activeTab: TabsNames;
+  activeTab?: TabsNames;
 };

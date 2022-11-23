@@ -61,7 +61,7 @@ ul.tabList button:disabled {
 }
 
 /* DarkTheme */
-.darkContainer  {
+.darkContainer button{
   color: #ffffff;
 }
 .darkContainer ul.tabList {

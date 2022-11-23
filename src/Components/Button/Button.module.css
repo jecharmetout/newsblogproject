@@ -1,4 +1,4 @@
-.button{
+.button {
   padding: 16px 32px;
   display: flex;
   justify-content: center;
@@ -9,13 +9,11 @@
   border: none;
   cursor: pointer;
   transition: 0.1;
-
 }
 
 .primary {
   background: rgba(108, 27, 219, 1);
   color: white;
-
 }
 .primary:hover {
   background: rgba(145, 46, 242, 1);
@@ -23,11 +21,9 @@
 
 .secondary {
   background: rgba(49, 48, 55, 0.1);
-
 }
 .secondary:hover {
   background: rgba(49, 48, 55, 0.3);
-
 }
 
 .button:disabled {
@@ -38,3 +34,10 @@
   cursor: default;
 }
 
+.darkContainer.secondary {
+  background: rgba(255, 255, 255, 0.1) ;
+  color: white;
+}
+.darkContainer.secondary:hover {
+  background: rgba(255, 255, 255, 0.479) ;
+}

@@ -3,16 +3,16 @@ import classNames from "classnames";
 
 import styles from "./Tabs.module.css";
 
-// import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { TabsProps } from "./types";
 
 const Tabs: FC<TabsProps> = ({ tabs, onClick, activeTab }) => {
-  // const { theme } = useThemeContext();
+  const { theme } = useThemeContext();
 
   return (
     <div
       className={classNames(styles.wrapper, styles.wrapperTabs, {
-        // [styles.darkContainer]: theme === Theme.Dark,
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       <ul className={styles.tabList}>

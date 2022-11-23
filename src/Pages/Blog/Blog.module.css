@@ -1,0 +1,89 @@
+.sortSelect{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 65px;
+}
+.sortButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    
+}
+
+.darkContainer select{
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+}
+
+.lottieContainerAnimation {
+    width: 100%;
+    height: 700px;
+  }
+  .pagesContainer {
+    margin: 0px 24px;
+    display: flex;
+    padding: 0px;
+    margin-bottom: 72px;
+  }
+  .pageNumber {
+    list-style-type: none;
+    margin-right: 20px;
+    width: 42px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #53607a;
+    outline: none;
+  }
+  .pageNumber a{
+      width:100%;
+      height: 100%;
+      text-align: center;
+  }
+  .pageNumber:hover {
+    cursor: pointer;
+    background-color: #f0edf6;
+  }
+  .linkPage {
+    outline: none;
+  }
+  .linkPage:focus {
+    outline: none;
+  }
+  .activePageNumber {
+    box-sizing: border-box;
+    width: 42px;
+    height: 20px;
+    border: 1px solid rgb(101, 85, 168);
+    color: rgb(121, 111, 158);
+  }
+  .arrowButton {
+    margin: auto;
+    align-items: flex-start;
+  }
+  .darkContainer .pageNumber a{
+    color: white;
+  }
+  .darkContainer .activePageNumber{
+
+    border: 1px solid white;
+    color: rgb(210, 194, 247);
+    background-color: rgba(150, 119, 235, 0.582)
+
+
+  }
+  .darkContainer .pageNumber:hover {
+    cursor: pointer;
+    background-color: #b9b9b9;
+    color: rgb(123, 120, 131);
+
+  }

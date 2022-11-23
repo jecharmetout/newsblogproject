@@ -1,0 +1,98 @@
+.container {
+  width: 1120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100;
+  border: 1px solid transparent;
+}
+.headForm {
+  margin-bottom: 72px;
+  align-self: flex-start;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.formContainer {
+  padding: 40px;
+  border: 1px solid #dadada;
+  background: #ffffff;
+  width: 624px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 72px;
+  border-radius: 16px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.passwordError {
+  margin-top: 15px;
+}
+.forgotPassword {
+  margin-top: 15px;
+}
+.signInBtn {
+  height: 65px;
+  margin-bottom: 40px;
+  width: 100%;
+  margin-top: 8px;
+}
+.haveAccount {
+  margin-bottom: 40px;
+  align-self: center;
+  color: #8d8e97;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+.backHomeBtn {
+  cursor: pointer;
+}
+.backHomeBtn:hover {
+  color: rgba(108, 27, 219, 1);
+}
+a {
+  color: rgba(49, 48, 55, 1);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+a:hover {
+  color: rgba(108, 27, 219, 1);
+}
+
+/* DarkTheme */
+
+.darkContainer {
+  background-color: #313037;
+  color: #ffffff;
+}
+.darkContainer .formContainer {
+  background-color: #313037;
+  border: 1px solid #8d8e97;
+}
+.darkContainer a {
+  color: #ffffff;
+}
+.darkContainer a:visited {
+  color: rgb(170, 170, 233);
+}
+.darkContainer .backHomeBtn {
+  color: #ffffff;
+}
+.darkContainer .backHomeBtn:hover {
+  color: #912ef2;
+}
+.darkContainer a:hover {
+  color: #912ef2;
+}
+
+/*  */

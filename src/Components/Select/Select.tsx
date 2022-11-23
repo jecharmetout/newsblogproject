@@ -3,7 +3,8 @@ import classNames from "classnames";
 
 import styles from "./Select.module.css";
 import { SelectProps } from "./types";
-import Label from "../Label";
+import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+
 
 const Select: FC<SelectProps> = ({
   options,
@@ -11,8 +12,12 @@ const Select: FC<SelectProps> = ({
   onChange,
   disabled
 }) => {
+  const { theme } = useThemeContext();
+
   return (
-    <div className={styles.customSelect}>
+    <div  className={classNames(styles.customSelect, {
+        [styles.darkContainer]: theme === Theme.Dark
+      })} >
       <select
         value={selectValue}
         onChange={onChange}

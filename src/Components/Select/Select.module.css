@@ -4,18 +4,16 @@
   width: 256px;
 }
 
-
-.customSelect::after{
-    content: '';
-    border-width: 7px;
-    border-style: solid;
-    border-color: transparent;
-    border-top-color: grey;
+.customSelect::after {
+  content: "";
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: grey;
   display: inline-block;
   position: absolute;
   right: 20px;
   bottom: 20px;
-
 }
 .select {
   width: 100%;
@@ -49,3 +47,4 @@ option span {
   font-size: 16px;
   line-height: 24px;
 }
+
