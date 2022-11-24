@@ -8,7 +8,6 @@ export type TabsNameArray = {
 
 export type TabsProps = {
   tabs: Array<TabsNameArray>;
-  // onClick?: (id: TabsNames) => void;
-  onClick?: () => void;
-  activeTab?: TabsNames;
+  onClick: (id: TabsNames) => void;
+  activeTab: TabsNames;
 };

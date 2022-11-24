@@ -24,8 +24,7 @@ const Tabs: FC<TabsProps> = ({ tabs, onClick, activeTab }) => {
                 [styles.activeTab]: activeTab === key
               })}
             >
-              {/* <button onClick={() => onClick(key)} disabled={disabled}> */}
-              <button onClick={onClick} disabled={disabled}>
+              <button onClick={() => onClick(key)} disabled={disabled}>
                 {title}
               </button>
             </li>

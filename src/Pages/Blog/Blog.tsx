@@ -31,11 +31,11 @@ const Blog = () => {
   const { theme } = useThemeContext();
 
   const isBlogLoading = useSelector(PostsSelectors.getBlogLoading);
-
+  const activeTab = useSelector(PostsSelectors.getActiveTab);
   const cardsList = useSelector(PostsSelectors.getCardsList);
   const dispatch = useDispatch();
   const [page, setPage] = useState(DEFAULT_PAGE_NUMBER);
-  const [order, setOrder] = useState(SortOrder.Title);
+  const [order, setOrder] = useState(SortOrder.Initial);
 
 
   const cardsCount = useSelector(PostsSelectors.getCardsCount);
@@ -70,8 +70,6 @@ const Blog = () => {
     }
   ];
 
-  const activeTab = TabsNames.Articles;
-
   useEffect(() => {
     const _start = (page - 1) * PER_PAGE;
     dispatch(getPosts({ _start, _sort: order }));
@@ -80,6 +78,9 @@ const Blog = () => {
 
   const onPageChange = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
+  };
+  const onTabClick = (id: TabsNames) => {
+    dispatch(setActiveTab(id));
   };
 
   return (
@@ -91,7 +92,7 @@ const Blog = () => {
       {!isBlogLoading ? (
         <div>
           <Title title={"Blog"} />
-          <Tabs tabs={tabs} onClick={() => {}} activeTab={activeTab} />
+          <Tabs tabs={tabs} onClick={onTabClick} activeTab={activeTab} />
           <div className={styles.sortSelect}>
             <div className={styles.sortButton}>
               <Button title={"Day"} type={ButtonType.Primary} />

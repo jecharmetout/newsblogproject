@@ -29,7 +29,7 @@ const INITIAL_STATE: PostStateType = {
   selectedImgPost: null,
   singlePostModalVisible: false,
   singleImgModalVisible: false,
-  activeTab: TabsNames.News,
+  activeTab: TabsNames.Articles,
   cardsList: [],
   singlePost: null,
   isPostLoading: false,
