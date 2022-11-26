@@ -10,11 +10,15 @@ import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { PathNames } from "../../Pages/Router/Router";
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonType } from "../Button";
+import { useDispatch } from "react-redux";
+import { setSelectedPost, setSinglePostModalVisible } from "../../Redux/reducers/postsReducer";
 
 const Post: FC<PostProps> = ({ post }) => {
   const { imageUrl, text, title, id } = post;
 
   const { theme } = useThemeContext();
+  const dispatch = useDispatch();
+
   // const params = useParams()
   // console.log(params)
 
@@ -22,6 +26,10 @@ const Post: FC<PostProps> = ({ post }) => {
 
   const onBackHomeClick = () => {
     navigate(PathNames.Home);
+  };
+  const onOpenPostModal = () => {
+    dispatch(setSelectedPost(post));
+    dispatch(setSinglePostModalVisible(true));
   };
 
   return (
@@ -59,7 +67,7 @@ const Post: FC<PostProps> = ({ post }) => {
                 </a>
               </Button>
 
-              <Button type={ButtonType.Secondary} className={styles.ellipsis}>
+              <Button type={ButtonType.Secondary} className={styles.ellipsis} onClick={onOpenPostModal}>
                 <Ellipsis />
               </Button>
             </div>

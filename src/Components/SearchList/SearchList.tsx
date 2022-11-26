@@ -4,6 +4,7 @@ import styles from "./SearchList.module.css";
 
 import CardPost from "../CardPost";
 import { SearchListProps } from "./types";
+import EmptyState from "../EmptyState";
 
 const SearchList: FC<SearchListProps> = ({ searchedPosts, count, onScroll }) => {
   return searchedPosts && searchedPosts.length > 0 ? (
@@ -12,6 +13,8 @@ const SearchList: FC<SearchListProps> = ({ searchedPosts, count, onScroll }) => 
         return <CardPost post={post} key={post.id} />;
       })}
     </div>
-  ) : null;
+  ) : (
+    <EmptyState />
+  );;
 };
 export default SearchList;

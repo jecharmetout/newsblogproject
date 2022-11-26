@@ -15,6 +15,7 @@ export type CardPostType = {
   lesson_num: number;
   title: string;
   author: number;
+  
 };
 export type CardListType = Array<CardPostType>;
 
@@ -29,8 +30,8 @@ export type GetPostsPayload = {
 };
 
 export type SearchPostsPayload = {
-  search: string;
-  offset: number;
+  title_contains: string;
+  _start: number;
   isOverwrite: boolean;
 };
 export type SetSearchedPostsPayload = {

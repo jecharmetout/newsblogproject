@@ -12,6 +12,7 @@ import processingAnimation from "../../lotties/processing.json";
 import Post from "../../Components/Post";
 import RecomendedPostsList from "../../Components/RecomendedPostsList";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
+import SinglePostModal from "../Blog/Components/SinglePostModal";
 
 const post = [
   {
@@ -171,6 +172,8 @@ const PostContent = () => {
     <div>
       <Post post={post} />
       <RecomendedPostsList cardList={cardsList} />
+      <SinglePostModal />
+
     </div>
   ) : (
     <div className={styles.lottieContainer}>

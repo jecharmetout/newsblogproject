@@ -14,7 +14,7 @@ import { PathNames } from "../../Pages/Router/Router";
 import { searchForPosts } from "../../Redux/reducers/postsReducer";
 
 const Navbar = ({ onClick, isOpened }: any) => {
-  const { theme, onChangeTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = { username: "Artem Malkin" };
@@ -32,7 +32,7 @@ const Navbar = ({ onClick, isOpened }: any) => {
   };
   const onSearch = () => {
     if (value.length > 0) {
-      dispatch(searchForPosts({ search: value, offset: 0, isOverwrite: true }));
+      dispatch(searchForPosts({ title_contains: value, _start: 0, isOverwrite: true }));
       navigate(PathNames.Search, { state: { searchElement: value } });
       setValue("");
       onClick();

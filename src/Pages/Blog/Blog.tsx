@@ -26,6 +26,8 @@ import {
 } from "../../Redux/reducers/postsReducer";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
+import SingleImgModal from "./Components/SingleImgModal";
+import SinglePostModal from "./Components/SinglePostModal";
 
 const Blog = () => {
   const { theme } = useThemeContext();
@@ -109,6 +111,9 @@ const Blog = () => {
             </div>
           </div>
           <CardList cardList={cardsList} />
+          <SinglePostModal />
+          <SingleImgModal />
+
         </div>
       ) : (
         <div className={styles.lottieContainer}>

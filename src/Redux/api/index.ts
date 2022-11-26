@@ -12,8 +12,8 @@ const getPostsCount = () => {
   return API.get("/v3/articles/count");
 };
 
-const getSearchedPosts = (_contains: string, _start: number) => {
-  return API.get("/v3/blogs", { _contains, _limit: PER_PAGE, _start });
+const getSearchedPosts = (title_contains: string, _start: number) => {
+  return API.get("/v3/articles", { title_contains, _limit: PER_PAGE, _start });
 };
 const getPost = (id: string) => {
   return API.get(`/v3/articles/${id}/`);

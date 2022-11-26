@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PostType } from "../../Components/Post/types";
 import {
   CardListType,
   CardPostType,
@@ -8,7 +9,7 @@ import {
   TabsNames
 } from "../../Utils";
 type PostStateType = {
-  selectedPost: CardPostType | null;
+  selectedPost: CardPostType | null | PostType;
   selectedImgPost: CardPostType | null;
   singlePostModalVisible: boolean;
   singleImgModalVisible: boolean;
@@ -53,7 +54,7 @@ const postsReducer = createSlice({
     setSinglePostLoading: (state, action: PayloadAction<boolean>) => {
       state.isPostLoading = action.payload;
     },
-    setSelectedPost: (state, action: PayloadAction<CardPostType | null>) => {
+    setSelectedPost: (state, action: PayloadAction<CardPostType | null | PostType>) => {
       state.selectedPost = action.payload;
       // state.singlePostModalVisible = true;
     },

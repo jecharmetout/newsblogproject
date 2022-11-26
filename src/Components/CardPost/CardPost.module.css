@@ -9,6 +9,7 @@
   border-radius: 16px;
   background: #ffffff;
 }
+
 .imgWrapper {
   justify-content: center;
   align-items: center;
@@ -67,6 +68,14 @@
   color: rgba(49, 48, 55, 0.5);
   margin-bottom: 8px;
 }
+.iconsOptions {
+  display: flex;
+  gap: 30px;
+  cursor: pointer;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 32px;
+}
 
 .darkContainer {
   background: rgba(255, 255, 255, 0.1);
@@ -80,5 +89,8 @@
   color: white;
 }
 .darkContainer .title:hover {
-    color: rgb(147, 114, 192);
-  }
+  color: rgb(147, 114, 192);
+}
+.darkContainer svg > path {
+  fill: white;
+}

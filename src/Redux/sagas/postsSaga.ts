@@ -11,6 +11,7 @@ import {
   setCardsList,
   setSearchedPosts,
   setSearchedPostsCount,
+  setSearchPostsLoading,
   setSinglePost,
   setSinglePostLoading
 } from "../reducers/postsReducer";
@@ -56,21 +57,21 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
   yield put(setSinglePostLoading(false));
 }
 function* getSearchedPostsWorker(action: PayloadAction<SearchPostsPayload>) {
-  const { offset, isOverwrite, search } = action.payload;
+  const { _start, isOverwrite, title_contains } = action.payload;
 
-  //   yield put(setSearchPostsLoading(isOverwrite));
+    yield put(setSearchPostsLoading(true));
   const { data, status, problem } = yield call(
     Api.getSearchedPosts,
-    search,
-    offset
+    title_contains,
+    _start
   );
   if (status === 200 && data) {
-    yield put(setSearchedPostsCount(data.count));
-    yield put(setSearchedPosts({ data: data.results, isOverwrite }));
+    // yield put(setSearchedPostsCount(data.count));
+    yield put(setSearchedPosts({ data: data, isOverwrite }));
   } else {
     console.log("Error getting search posts", problem);
   }
-  //   yield put(setSearchPostsLoading(false));
+    yield put(setSearchPostsLoading(false));
 }
 
 export default function* postsSagaWatcher() {
