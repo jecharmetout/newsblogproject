@@ -10,6 +10,7 @@ import CardList from "../../Components/CardList";
 import Title from "../../Components/Title";
 import Tabs from "../../Components/Tabs";
 import {
+  ButtonSort,
   DEFAULT_PAGE_NUMBER,
   PER_PAGE,
   SortOrder,
@@ -21,6 +22,7 @@ import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
 import {
   getPosts,
   getPostsCount,
+  setActiveBtn,
   setActiveTab,
   setCardsList
 } from "../../Redux/reducers/postsReducer";
@@ -28,16 +30,19 @@ import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
 import SingleImgModal from "./Components/SingleImgModal";
 import SinglePostModal from "./Components/SinglePostModal";
+import ButtonGroup from "../../Components/ButtonGroup";
 
 const Blog = () => {
   const { theme } = useThemeContext();
 
   const isBlogLoading = useSelector(PostsSelectors.getBlogLoading);
   const activeTab = useSelector(PostsSelectors.getActiveTab);
+  const activeBtn = useSelector(PostsSelectors.getActiveBtn);
   const cardsList = useSelector(PostsSelectors.getCardsList);
   const dispatch = useDispatch();
   const [page, setPage] = useState(DEFAULT_PAGE_NUMBER);
   const [order, setOrder] = useState(SortOrder.Initial);
+  const isDayBtn = activeTab === ButtonSort.Day;
 
 
   const cardsCount = useSelector(PostsSelectors.getCardsCount);
@@ -55,6 +60,28 @@ const Blog = () => {
       disabled: false
     }
   ];
+  const buttonGroup = [
+    {
+      key: ButtonSort.Day,
+      title: "Day",
+      disabled: false
+    },
+    {
+      key: ButtonSort.Week,
+      title: "Week",
+      disabled: false
+    },
+    {
+      key: ButtonSort.Month,
+      title: "Month",
+      disabled: false
+    },
+    {
+      key: ButtonSort.Year,
+      title: "Year",
+      disabled: false
+    },
+  ]
   const options = [
     {
       key: SortOrder.Initial,
@@ -84,6 +111,10 @@ const Blog = () => {
   const onTabClick = (id: TabsNames) => {
     dispatch(setActiveTab(id));
   };
+  const onBtnGroupClick = (id:ButtonSort)=>{
+    dispatch(setActiveBtn(id));
+
+  }
 
   return (
     <div
@@ -96,13 +127,8 @@ const Blog = () => {
           <Title title={"Blog"} />
           <Tabs tabs={tabs} onClick={onTabClick} activeTab={activeTab} />
           <div className={styles.sortSelect}>
-            <div className={styles.sortButton}>
-              <Button title={"Day"} type={ButtonType.Primary} />
-              <Button title={"Week"} type={ButtonType.Secondary} />
-              <Button title={"Month"} type={ButtonType.Secondary} />
-              <Button title={"Year"} type={ButtonType.Secondary} />
-            </div>
-            <div className={styles.sortButton}>
+            <ButtonGroup buttonGroup={buttonGroup} onClick={onBtnGroupClick} activeBtn={activeBtn}/>
+            <div>
               <Select
                 selectValue={order}
                 onChange={(event: any) => setOrder(event.target.value)}

@@ -1,3 +1,4 @@
+import { ButtonSort } from "./../../Utils/globalTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PostType } from "../../Components/Post/types";
 import {
@@ -14,6 +15,7 @@ type PostStateType = {
   singlePostModalVisible: boolean;
   singleImgModalVisible: boolean;
   activeTab: TabsNames;
+  activeBtn: ButtonSort;
   cardsList: CardListType;
   singlePost: CardPostType | null;
   isPostLoading: boolean;
@@ -31,6 +33,7 @@ const INITIAL_STATE: PostStateType = {
   singlePostModalVisible: false,
   singleImgModalVisible: false,
   activeTab: TabsNames.Articles,
+  activeBtn: ButtonSort.Day,
   cardsList: [],
   singlePost: null,
   isPostLoading: false,
@@ -54,7 +57,10 @@ const postsReducer = createSlice({
     setSinglePostLoading: (state, action: PayloadAction<boolean>) => {
       state.isPostLoading = action.payload;
     },
-    setSelectedPost: (state, action: PayloadAction<CardPostType | null | PostType>) => {
+    setSelectedPost: (
+      state,
+      action: PayloadAction<CardPostType | null | PostType>
+    ) => {
       state.selectedPost = action.payload;
       // state.singlePostModalVisible = true;
     },
@@ -70,6 +76,9 @@ const postsReducer = createSlice({
     },
     setActiveTab: (state, action: PayloadAction<TabsNames>) => {
       state.activeTab = action.payload;
+    },
+    setActiveBtn: (state, action: PayloadAction<ButtonSort>) => {
+      state.activeBtn = action.payload;
     },
     setCardsList: (state, action: PayloadAction<CardListType>) => {
       state.cardsList = action.payload.map(card => {
@@ -118,6 +127,7 @@ export const {
   setSinglePostModalVisible,
   setSingleImgModalVisible,
   setActiveTab,
+  setActiveBtn,
   setCardsList,
 
   searchForPosts,
@@ -129,5 +139,5 @@ export const {
   setBlogLoading,
   setCardsCount,
   setSearchedPosts,
-  setSearchedPostsCount,
+  setSearchedPostsCount
 } = postsReducer.actions;

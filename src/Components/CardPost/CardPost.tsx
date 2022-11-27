@@ -28,7 +28,7 @@ const CardPost: FC<CardPostProps> = ({ post }) => {
     return data.toLocaleDateString("en-us", {
       year: "numeric",
       month: "short",
-      day: "numeric"
+      day: "numeric",
     });
   };
   const onOpenImgModal = (event: any) => {

@@ -1,11 +1,17 @@
 export enum TabsNames {
   Articles = "articles",
-  News = "news",
+  News = "news"
 }
 export enum SortOrder {
-  Initial="",
+  Initial = "",
   Title = "title",
   Date = "publishedAt"
+}
+export enum ButtonSort {
+  Day = "day",
+  Week = "week",
+  Month = "month",
+  Year = "year"
 }
 export type CardPostType = {
   id: number;
@@ -15,7 +21,6 @@ export type CardPostType = {
   lesson_num: number;
   title: string;
   author: number;
-  
 };
 export type CardListType = Array<CardPostType>;
 
