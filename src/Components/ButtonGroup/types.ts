@@ -9,5 +9,5 @@ export type ButtonGroupNameArray = {
 export type ButtonGroupProps = {
   buttonGroup: Array<ButtonGroupNameArray>;
   onClick: (id: ButtonSort) => void;
-  activeBtn: ButtonSort;
+  activeBtn?: ButtonSort;
 };

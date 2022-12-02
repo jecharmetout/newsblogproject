@@ -18,6 +18,12 @@
   }
   .modalActive{
     background: rgba(38, 34, 47, 0.5);
-    position: relative;
+    position: absolute;
+    width: 100%;
     z-index: 100;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    overflow: hidden;
 }

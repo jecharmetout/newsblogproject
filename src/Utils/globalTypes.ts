@@ -31,7 +31,8 @@ export type User = {
 };
 export type GetPostsPayload = {
   _start: number;
-  _sort: string;
+  _sort?: string;
+  publishedAt_gt?: string;
 };
 
 export type SearchPostsPayload = {

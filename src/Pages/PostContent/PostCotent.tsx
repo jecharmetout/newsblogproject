@@ -7,12 +7,18 @@ import classNames from "classnames";
 
 import styles from "./PostContent.module.css";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import { getPosts, getSinglePost } from "../../Redux/reducers/postsReducer";
+import {
+  getNews,
+  getPosts,
+  getSingleNews,
+  getSinglePost
+} from "../../Redux/reducers/postsReducer";
 import processingAnimation from "../../lotties/processing.json";
 import Post from "../../Components/Post";
 import RecomendedPostsList from "../../Components/RecomendedPostsList";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import SinglePostModal from "../Blog/Components/SinglePostModal";
+import { TabsNames } from "../../Utils";
 
 const post = [
   {
@@ -154,8 +160,11 @@ const PostContent = () => {
   const dispatch = useDispatch();
 
   const post = useSelector(PostsSelectors.getSinglePost);
-  const cardsList = useSelector(PostsSelectors.getCardsList);
 
+  const cardsList = useSelector(PostsSelectors.getCardsList);
+  const activeTab = useSelector(PostsSelectors.getActiveTab);
+
+  const isNews = activeTab === TabsNames.News;
 
   const isLoading = useSelector(PostsSelectors.getSinglePostLoading);
 
@@ -163,8 +172,11 @@ const PostContent = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getSinglePost(id));
-      dispatch(getPosts({ _start: 0, _sort: "" }));
+      isNews ? dispatch(getSingleNews(id)) : dispatch(getSinglePost(id));
+      console.log(id)
+      isNews
+        ? dispatch(getNews({ _start: 0, _sort: "" }))
+        : dispatch(getPosts({ _start: 0, _sort: "" }));
     }
   }, [id]);
 
@@ -173,7 +185,6 @@ const PostContent = () => {
       <Post post={post} />
       <RecomendedPostsList cardList={cardsList} />
       <SinglePostModal />
-
     </div>
   ) : (
     <div className={styles.lottieContainer}>

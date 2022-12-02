@@ -49,8 +49,12 @@ const postsReducer = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
+    getNews: (state, action: PayloadAction<GetPostsPayload>) => {},
+    getPostsBtn: (state, action: PayloadAction<GetPostsPayload>) => {},
     getPostsCount: (state, action: PayloadAction<undefined>) => {},
+    getNewsCount: (state, action: PayloadAction<undefined>) => {},
     getSinglePost: (state, action: PayloadAction<string>) => {},
+    getSingleNews: (state, action: PayloadAction<string>) => {},
     setSinglePost: (state, action: PayloadAction<CardPostType>) => {
       state.singlePost = action.payload;
     },
@@ -121,7 +125,10 @@ export default postsReducer.reducer;
 
 export const {
   getPosts,
+  getNews,
+  getPostsBtn,
   getPostsCount,
+  getNewsCount,
   setSelectedPost,
   setSelectedImgPost,
   setSinglePostModalVisible,
@@ -134,6 +141,7 @@ export const {
   setSearchPostsLoading,
 
   getSinglePost,
+  getSingleNews,
   setSinglePost,
   setSinglePostLoading,
   setBlogLoading,
