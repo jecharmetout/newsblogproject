@@ -5,16 +5,15 @@ import {
   getNews,
   getNewsCount,
   getPosts,
-  getPostsBtn,
   getPostsCount,
   getSingleNews,
   getSinglePost,
+  searchForNews,
   searchForPosts,
   setBlogLoading,
   setCardsCount,
   setCardsList,
   setSearchedPosts,
-  setSearchedPostsCount,
   setSearchPostsLoading,
   setSinglePost,
   setSinglePostLoading
@@ -27,7 +26,12 @@ function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
 
   const { _start, _sort, publishedAt_gt } = action.payload;
 
-  const { data, status, problem } = yield call(Api.getPostsList, _start, _sort, publishedAt_gt);
+  const { data, status, problem } = yield call(
+    Api.getPostsList,
+    _start,
+    _sort,
+    publishedAt_gt
+  );
   if (status === 200 && data) {
     yield put(setCardsList(data));
   } else {
@@ -37,30 +41,16 @@ function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
 
   yield put(setBlogLoading(false));
 }
+
 function* getNewsWorker(action: PayloadAction<GetPostsPayload>) {
-  yield put(setBlogLoading(true));
-
-  const { _start, _sort } = action.payload;
-
-  const { data, status, problem } = yield call(Api.getNewsList, _start, _sort);
-
-  if (status === 200 && data) {
-    yield put(setCardsList(data));
-  } else {
-    console.log(problem);
-  }
-  yield getNewsCountWorker()
-  yield put(setBlogLoading(false));
-}
-
-function* getPostByBtnWorker(action: PayloadAction<GetPostsPayload>) {
   yield put(setBlogLoading(true));
 
   const { _start, _sort, publishedAt_gt } = action.payload;
 
   const { data, status, problem } = yield call(
-    Api.getPostsListByButton,
+    Api.getNewsList,
     _start,
+    _sort,
     publishedAt_gt
   );
 
@@ -69,6 +59,7 @@ function* getPostByBtnWorker(action: PayloadAction<GetPostsPayload>) {
   } else {
     console.log(problem);
   }
+  yield getNewsCountWorker();
   yield put(setBlogLoading(false));
 }
 
@@ -124,7 +115,23 @@ function* getSearchedPostsWorker(action: PayloadAction<SearchPostsPayload>) {
     _start
   );
   if (status === 200 && data) {
-    // yield put(setSearchedPostsCount(data.count));
+    yield put(setSearchedPosts({ data: data, isOverwrite }));
+  } else {
+    console.log("Error getting search posts", problem);
+  }
+  yield put(setSearchPostsLoading(false));
+}
+
+function* getSearchedNewsWorker(action: PayloadAction<SearchPostsPayload>) {
+  const { _start, isOverwrite, title_contains } = action.payload;
+
+  yield put(setSearchPostsLoading(true));
+  const { data, status, problem } = yield call(
+    Api.getSearchedNews,
+    title_contains,
+    _start
+  );
+  if (status === 200 && data) {
     yield put(setSearchedPosts({ data: data, isOverwrite }));
   } else {
     console.log("Error getting search posts", problem);
@@ -136,10 +143,10 @@ export default function* postsSagaWatcher() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
     takeLatest(getNews, getNewsWorker),
-    takeLatest(getPostsBtn, getPostByBtnWorker),
     takeLatest(getPostsCount, getPostsCountWorker),
     takeLatest(getNewsCount, getNewsCountWorker),
     takeLatest(searchForPosts, getSearchedPostsWorker),
+    takeLatest(searchForNews, getSearchedNewsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(getSingleNews, getSingleNewsWorker)
   ]);

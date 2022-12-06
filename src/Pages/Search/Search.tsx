@@ -10,15 +10,31 @@ import styles from "./Search.module.css";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
 import { PathNames } from "../Router";
-import { DEFAULT_PAGE_NUMBER, PER_PAGE } from "../../Utils";
-import { searchForPosts } from "../../Redux/reducers/postsReducer";
+import { DEFAULT_PAGE_NUMBER, PER_PAGE, TabsNames } from "../../Utils";
+import {
+  searchForNews,
+  searchForPosts,
+  setActiveTab
+} from "../../Redux/reducers/postsReducer";
 import SinglePostModal from "../Blog/Components/SinglePostModal";
 import SingleImgModal from "../Blog/Components/SingleImgModal";
+import Tabs from "../../Components/Tabs";
 
 type LocationState = {
   searchElement: string;
 };
-
+const TABS = [
+  {
+    key: TabsNames.Articles,
+    title: "Articles",
+    disabled: false
+  },
+  {
+    key: TabsNames.News,
+    title: "News",
+    disabled: false
+  }
+];
 const Search = () => {
   const { theme } = useThemeContext();
 
@@ -29,19 +45,20 @@ const Search = () => {
   const { searchElement } = location.state as LocationState;
 
   const searchedPosts = useSelector(PostsSelectors.getSearchedPosts);
-  
+
   const searchedPostsCount = useSelector(PostsSelectors.getSearchedPostsCount);
   const isSearchPostsLoading = useSelector(
     PostsSelectors.getSearchedPostsLoading
   );
-
   const [page, setPage] = useState(DEFAULT_PAGE_NUMBER);
+  const activeTab = useSelector(PostsSelectors.getActiveTab);
+
+  const isNews = activeTab === TabsNames.News;
 
   // const searchString = useSelector(
   //   PostsSelectors.getSearchString
   // );
   // !! для поиска по буквенно
-console.log(searchedPosts)
   useEffect(() => {
     if (searchElement.length === 0) {
       navigate(PathNames.Home);
@@ -49,14 +66,34 @@ console.log(searchedPosts)
   }, [searchElement]);
 
   useEffect(() => {
-    const _start = (page - 1) * PER_PAGE;
-    dispatch(
-      searchForPosts({ title_contains: searchElement, _start, isOverwrite: false })
-    );
-  }, [page]);
+  const _start = (page - 1) * PER_PAGE;
+
+    isNews
+      ? dispatch(
+          searchForNews({
+            title_contains: searchElement,
+            _start,
+            isOverwrite: false
+          })
+        )
+      : dispatch(
+          searchForPosts({
+            title_contains: searchElement,
+            _start,
+            isOverwrite: false
+          })
+        );
+  }, [page, isNews]);
 
   const onScroll = () => {
     setPage(prevPage => prevPage + 1);
+  };
+
+  const capitalize = (str: string) =>
+    str.charAt(0).toUpperCase() + str.slice(1);
+
+  const onTabClick = (id: TabsNames) => {
+    dispatch(setActiveTab(id));
   };
   return (
     <div
@@ -65,8 +102,10 @@ console.log(searchedPosts)
       })}
     >
       <div className={styles.searchListTitle}>
-        Search results " {searchElement} "
+        Search {capitalize(activeTab)} results " {searchElement} "
       </div>
+      <Tabs tabs={TABS} onClick={onTabClick} activeTab={activeTab} />
+
       {!isSearchPostsLoading ? (
         <div>
           <SearchList
@@ -77,7 +116,7 @@ console.log(searchedPosts)
           <SinglePostModal />
           <SingleImgModal />
         </div>
-      ):(
+      ) : (
         <div className={styles.lottieContainer}>
           <Lottie
             className={styles.lottieContainerAnimation}

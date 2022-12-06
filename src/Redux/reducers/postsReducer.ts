@@ -50,7 +50,6 @@ const postsReducer = createSlice({
   reducers: {
     getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
     getNews: (state, action: PayloadAction<GetPostsPayload>) => {},
-    getPostsBtn: (state, action: PayloadAction<GetPostsPayload>) => {},
     getPostsCount: (state, action: PayloadAction<undefined>) => {},
     getNewsCount: (state, action: PayloadAction<undefined>) => {},
     getSinglePost: (state, action: PayloadAction<string>) => {},
@@ -105,19 +104,15 @@ const postsReducer = createSlice({
       state,
       action: PayloadAction<SetSearchedPostsPayload>
     ) => {
-      const { isOverwrite, data } = action.payload;
-      if (isOverwrite) {
-        state.searchedPosts = data;
-      } else {
-        state.searchedPosts.push(...data);
-      }
+      const { data } = action.payload;
+
+      state.searchedPosts = data;
     },
     setSearchedPostsCount: (state, action: PayloadAction<number>) => {
       state.searchedPostsCount = action.payload;
     },
-    searchForPosts: (state, action: PayloadAction<SearchPostsPayload>) => {
-      // !! state.searchString = action.payload; для по буквенного поиска
-    }
+    searchForPosts: (state, action: PayloadAction<SearchPostsPayload>) => {},
+    searchForNews: (state, action: PayloadAction<SearchPostsPayload>) => {}
   }
 });
 
@@ -126,7 +121,6 @@ export default postsReducer.reducer;
 export const {
   getPosts,
   getNews,
-  getPostsBtn,
   getPostsCount,
   getNewsCount,
   setSelectedPost,
@@ -138,6 +132,7 @@ export const {
   setCardsList,
 
   searchForPosts,
+  searchForNews,
   setSearchPostsLoading,
 
   getSinglePost,

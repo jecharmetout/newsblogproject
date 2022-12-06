@@ -11,13 +11,21 @@ import { useNavigate } from "react-router-dom";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 
 import { PathNames } from "../../Pages/Router/Router";
-import { searchForPosts } from "../../Redux/reducers/postsReducer";
+import {
+  searchForNews,
+  searchForPosts
+} from "../../Redux/reducers/postsReducer";
+import postsSelectors from "../../Redux/selectors/postsSelectors";
+import { TabsNames } from "../../Utils";
 
 const Navbar = ({ onClick, isOpened }: any) => {
   const { theme } = useThemeContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = { username: "Artem Malkin" };
+  const activeTab = useSelector(postsSelectors.getActiveTab);
+
+  const isNews = activeTab === TabsNames.News;
 
   const [value, setValue] = useState<string>("");
 
@@ -32,7 +40,21 @@ const Navbar = ({ onClick, isOpened }: any) => {
   };
   const onSearch = () => {
     if (value.length > 0) {
-      dispatch(searchForPosts({ title_contains: value, _start: 0, isOverwrite: true }));
+      isNews
+        ? dispatch(
+            searchForNews({
+              title_contains: value,
+              _start: 0,
+              isOverwrite: true
+            })
+          )
+        : dispatch(
+            searchForPosts({
+              title_contains: value,
+              _start: 0,
+              isOverwrite: true
+            })
+          );
       navigate(PathNames.Search, { state: { searchElement: value } });
       setValue("");
       onClick();
@@ -56,15 +78,15 @@ const Navbar = ({ onClick, isOpened }: any) => {
               onChange={onChange}
               value={value}
             />
-            {value.length > 0 ?  (
+            {value.length > 0 ? (
               <div className={styles.searchIcon} onClick={onSearch}>
                 <SearchIcon />
               </div>
-            ): (
+            ) : (
               <div className={styles.cancelIcon} onClick={onClick}>
                 <CancelIcon />
               </div>
-            ) }
+            )}
           </div>
         )}
         <div className={styles.userSearchWrapper}>

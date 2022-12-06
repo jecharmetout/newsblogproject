@@ -17,18 +17,14 @@ import {
   SortOrder,
   TabsNames
 } from "../../Utils";
-import Button, { ButtonType } from "../../Components/Button";
 import Select from "../../Components/Select";
 import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
 import {
   getNews,
-  getNewsCount,
   getPosts,
-  getPostsBtn,
   getPostsCount,
-  setActiveBtn,
   setActiveTab,
-  setCardsList
+  setCardsCount
 } from "../../Redux/reducers/postsReducer";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
@@ -93,13 +89,11 @@ const Blog = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(DEFAULT_PAGE_NUMBER);
   const [order, setOrder] = useState(SortOrder.Initial);
-  // const isDayBtn = activeTab === ButtonSort.Day;
   const isNews = activeTab === TabsNames.News;
 
-  const cardsCount = useSelector(PostsSelectors.getCardsCount);
-  const pagesCount = Math.ceil(cardsCount / PER_PAGE);
-
   const [activeBtn, setActiveBtn] = useState<ButtonSort>();
+
+  // if(activeBtn){dispatch(setCardsCount(cardsList.length))};
 
   useEffect(() => {
     const _start = (page - 1) * PER_PAGE;
@@ -109,22 +103,39 @@ const Blog = () => {
     const publishedAt = activeBtn ? dateAgo : undefined;
     const sort = activeBtn ? SortOrder.Date : order;
     isNews
-      ? dispatch(getNews({ _start, _sort: sort, publishedAt_gt: publishedAt  }))
-      : dispatch(getPosts({ _start, _sort: sort, publishedAt_gt: publishedAt }));
-    // isNews ? dispatch(getNewsCount()) : dispatch(getPostsCount());
+      ? dispatch(getNews({ _start, _sort: sort, publishedAt_gt: publishedAt }))
+      : dispatch(
+          getPosts({ _start, _sort: sort, publishedAt_gt: publishedAt })
+        );
   }, [page, order, isNews, activeBtn]);
+
+  const cardsCount = useSelector(PostsSelectors.getCardsCount);
+  const pagesCount = Math.ceil(cardsCount / PER_PAGE);
 
   const onPageChange = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
   };
   const onTabClick = (id: TabsNames) => {
     dispatch(setActiveTab(id));
+    setActiveBtn(undefined);
+    setOrder(SortOrder.Initial);
+
+
   };
   const onBtnGroupClick = (id: ButtonSort) => {
-    setActiveBtn(id);
+    if (activeBtn === id) {
+      setActiveBtn(undefined);
+    } else {
+      setActiveBtn(id);
+      setOrder(SortOrder.Initial);
+    }
   };
-
-
+  const onChangeClick = (event: any) => {
+    setOrder(event.target.value);
+    setActiveBtn(undefined);
+  };
+  console.log(`cardsCount ${cardsCount}`);
+  console.log(`cards list length ${cardsList.length}`);
   return (
     <div
       className={classNames({
@@ -145,7 +156,7 @@ const Blog = () => {
             <div>
               <Select
                 selectValue={order}
-                onChange={(event: any) => setOrder(event.target.value)}
+                onChange={onChangeClick}
                 options={OPTIONS}
               />
             </div>
