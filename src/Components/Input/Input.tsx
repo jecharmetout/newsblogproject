@@ -1,7 +1,5 @@
 import React, { FC, ChangeEvent } from "react";
 import classNames from "classnames";
-
-//@ts-ignore
 import styles from "./Input.module.css";
 import { InputProps } from "./types";
 

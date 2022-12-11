@@ -22,7 +22,7 @@ ul.tabList li {
   margin-left: 40px;
   width: 140px;
 
-  /* border-bottom: 2px solid blue; */
+
 }
 ul.tabList li:first-child {
   margin-left: 0;

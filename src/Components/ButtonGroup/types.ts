@@ -1,4 +1,4 @@
-import { ButtonSort, SortOrder } from "../../Utils";
+import { ButtonSort } from "../../Utils";
 
 export type ButtonGroupNameArray = {
   key: ButtonSort;

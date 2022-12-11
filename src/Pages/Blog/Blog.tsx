@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import Lottie from "lottie-react";
 import moment from "moment";
-
 import classNames from "classnames";
+
+
 import styles from "./Blog.module.css";
 
 import CardList from "../../Components/CardList";
@@ -22,9 +23,7 @@ import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
 import {
   getNews,
   getPosts,
-  getPostsCount,
   setActiveTab,
-  setCardsCount
 } from "../../Redux/reducers/postsReducer";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
@@ -93,8 +92,6 @@ const Blog = () => {
 
   const [activeBtn, setActiveBtn] = useState<ButtonSort>();
 
-  // if(activeBtn){dispatch(setCardsCount(cardsList.length))};
-
   useEffect(() => {
     const _start = (page - 1) * PER_PAGE;
     const dateAgo = moment()
@@ -103,14 +100,39 @@ const Blog = () => {
     const publishedAt = activeBtn ? dateAgo : undefined;
     const sort = activeBtn ? SortOrder.Date : order;
     isNews
-      ? dispatch(getNews({ _start, _sort: sort, publishedAt_gt: publishedAt }))
+      ? dispatch(
+          getNews({
+            _limit: PER_PAGE,
+            _start,
+            _sort: sort,
+            publishedAt_gt: publishedAt
+          })
+        )
       : dispatch(
-          getPosts({ _start, _sort: sort, publishedAt_gt: publishedAt })
+          getPosts({
+            _start,
+            _sort: sort,
+            publishedAt_gt: publishedAt,
+            _limit: activeBtn ? undefined : PER_PAGE
+          })
         );
   }, [page, order, isNews, activeBtn]);
 
   const cardsCount = useSelector(PostsSelectors.getCardsCount);
-  const pagesCount = Math.ceil(cardsCount / PER_PAGE);
+
+  const [pagesCount, setPagesCount] = useState(0);
+
+  useEffect(() => {
+    setPage(1);
+  }, [activeBtn, order, activeTab]);
+
+
+  useEffect(() => {
+    setPagesCount(Math.ceil(cardsCount / PER_PAGE));
+    if (cardsList.length < 12) {
+      setPagesCount(page);
+    }
+  }, [cardsCount, cardsList]);
 
   const onPageChange = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
@@ -119,8 +141,6 @@ const Blog = () => {
     dispatch(setActiveTab(id));
     setActiveBtn(undefined);
     setOrder(SortOrder.Initial);
-
-
   };
   const onBtnGroupClick = (id: ButtonSort) => {
     if (activeBtn === id) {
@@ -134,8 +154,6 @@ const Blog = () => {
     setOrder(event.target.value);
     setActiveBtn(undefined);
   };
-  console.log(`cardsCount ${cardsCount}`);
-  console.log(`cards list length ${cardsList.length}`);
   return (
     <div
       className={classNames({

@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Lottie from "lottie-react";
 
-import classNames from "classnames";
 
 import styles from "./PostContent.module.css";
-import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import {
   getNews,
   getPosts,
@@ -18,142 +16,8 @@ import Post from "../../Components/Post";
 import RecomendedPostsList from "../../Components/RecomendedPostsList";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import SinglePostModal from "../Blog/Components/SinglePostModal";
-import { TabsNames } from "../../Utils";
+import { PER_PAGE, TabsNames } from "../../Utils";
 
-const post = [
-  {
-    id: 1,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 2,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 3,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 4,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 5,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 6,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 7,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 8,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 9,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 10,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  },
-  {
-    id: 11,
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg",
-    text:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    publishedAt: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    author: 0
-  }
-];
 
 const PostContent = () => {
   const params = useParams();
@@ -173,10 +37,9 @@ const PostContent = () => {
   useEffect(() => {
     if (id) {
       isNews ? dispatch(getSingleNews(id)) : dispatch(getSinglePost(id));
-      console.log(id)
       isNews
-        ? dispatch(getNews({ _start: 0, _sort: "" }))
-        : dispatch(getPosts({ _start: 0, _sort: "" }));
+        ? dispatch(getNews({ _limit:PER_PAGE,_start: 0, _sort: "" }))
+        : dispatch(getPosts({ _limit:PER_PAGE,_start: 0, _sort: "" }));
     }
   }, [id]);
 

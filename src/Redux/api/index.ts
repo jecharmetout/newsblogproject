@@ -5,11 +5,11 @@ const API = create({
   baseURL: "https://api.spaceflightnewsapi.net"
 });
 
-const getPostsList = (_start: number, _sort?: string, publishedAt_gt?:string) => {
-  return API.get("/v3/articles", { _limit: PER_PAGE, _start, _sort, publishedAt_gt });
+const getPostsList = (_start: number, _sort?: string, publishedAt_gt?:string, _limit?:number) => {
+  return API.get("/v3/articles", { _limit, _start, _sort, publishedAt_gt });
 };
-const getNewsList = (_start: number, _sort?: string, publishedAt_gt?:string) => {
-  return API.get("/v3/blogs", { _limit: PER_PAGE, _start, _sort, publishedAt_gt });
+const getNewsList = ( _start: number, _sort?: string, publishedAt_gt?:string,_limit?:number) => {
+  return API.get("/v3/blogs", { _limit, _start, _sort, publishedAt_gt });
 };
 const getPostsCount = () => {
   return API.get("/v3/articles/count");

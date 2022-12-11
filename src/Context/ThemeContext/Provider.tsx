@@ -1,12 +1,9 @@
 import React, { FC, ReactNode } from "react";
 
 import ThemeContext, { Theme } from "./Context";
+import { ThemeProviderProps } from "./types";
 
-type ThemeProviderProps = {
-    theme: Theme;
-    onChangeTheme: () => void;
-    children: ReactNode;
-  };
+
 
   const ThemeProvider: FC<ThemeProviderProps> = ({
     theme,

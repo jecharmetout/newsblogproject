@@ -5,7 +5,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 886px;
-    /* height: 588px; */
     display: none;
     position: fixed;
     top: 50%;
@@ -32,8 +31,6 @@
     align-items: center;
   }
   .modalContent {
-    /* width: 736px; */
-    /* height: 455px; */
     margin: auto;
   
   }

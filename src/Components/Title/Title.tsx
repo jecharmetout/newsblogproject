@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import styles from "./Title.module.css";
 import classNames from "classnames";
+
+import styles from "./Title.module.css";
 import { TitleProps } from "./types";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 

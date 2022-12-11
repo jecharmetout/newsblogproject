@@ -1,3 +1,3 @@
-export type UserType={
-    userName: string;
-}
+export type UserType = {
+  userName: string;
+};

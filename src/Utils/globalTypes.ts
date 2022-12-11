@@ -30,6 +30,7 @@ export type User = {
   email: string;
 };
 export type GetPostsPayload = {
+  _limit?: number;
   _start: number;
   _sort?: string;
   publishedAt_gt?: string;
@@ -38,9 +39,7 @@ export type GetPostsPayload = {
 export type SearchPostsPayload = {
   title_contains: string;
   _start: number;
-  isOverwrite: boolean;
 };
 export type SetSearchedPostsPayload = {
   data: CardListType;
-  isOverwrite: boolean;
 };

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardPost from "../../../../Components/CardPost";
 import ModalWindow from "../../../../Components/ModalWindow";

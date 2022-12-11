@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+
+
 import styles from "./Navbar.module.css";
-import User from "../User/User";
 
 import { Logo, CancelIcon, SearchIcon, UserIcon } from "../../Assets/Icons";
-import classNames from "classnames";
 import Input from "../Input";
-import { useDispatch, useSelector } from "react-redux";
-// import AuthSelectors from "../../Redux/selectors/authSelectors";
-import { useNavigate } from "react-router-dom";
+import User from "../User/User";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 
 import { PathNames } from "../../Pages/Router/Router";
@@ -32,12 +33,17 @@ const Navbar = ({ onClick, isOpened }: any) => {
   const onChange = (inputValue: string) => {
     setValue(inputValue);
   };
+
   const onSignInClick = () => {
     navigate(PathNames.SignIn);
   };
+
+
   const onLogoClick = () => {
     navigate(PathNames.Home);
   };
+
+
   const onSearch = () => {
     if (value.length > 0) {
       isNews
@@ -45,14 +51,12 @@ const Navbar = ({ onClick, isOpened }: any) => {
             searchForNews({
               title_contains: value,
               _start: 0,
-              isOverwrite: true
             })
           )
         : dispatch(
             searchForPosts({
               title_contains: value,
               _start: 0,
-              isOverwrite: true
             })
           );
       navigate(PathNames.Search, { state: { searchElement: value } });

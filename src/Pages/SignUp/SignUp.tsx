@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
 import styles from "./SignUp.module.css";
@@ -11,7 +10,6 @@ import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { PathNames } from "../../Pages/Router/Router";
-// import { createNewUser } from "../../Redux/reducers/authReducer";
 
 const validateEmail = (email: string) => {
   return String(email)
@@ -22,7 +20,7 @@ const validateEmail = (email: string) => {
 };
 
 const SignUp = () => {
-  //   const dispatch = useDispatch()
+
   const [name, setName] = useState("");
 
   const [email, setEmail] = useState("");
@@ -79,9 +77,6 @@ const SignUp = () => {
     setConfirmPasswordTouched(true);
   };
 
-  //   const onSignUp = ()=>{
-  //     dispatch(createNewUser({username: name, email, password}))
-  //   }
 
   const navigate = useNavigate();
 
@@ -147,7 +142,6 @@ const SignUp = () => {
           <Button
             type={ButtonType.Primary}
             title={"Sign Up"}
-            // onClick={onSignUp}
             className={styles.signUpBtn}
             disabled={false}
           />

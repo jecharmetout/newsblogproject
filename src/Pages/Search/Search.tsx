@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import styles from "./Search.module.css";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import processingAnimation from "../../lotties/processing.json";
 import { PathNames } from "../Router";
-import { DEFAULT_PAGE_NUMBER, PER_PAGE, TabsNames } from "../../Utils";
+import { TabsNames } from "../../Utils";
 import {
   searchForNews,
   searchForPosts,
@@ -19,10 +19,9 @@ import {
 import SinglePostModal from "../Blog/Components/SinglePostModal";
 import SingleImgModal from "../Blog/Components/SingleImgModal";
 import Tabs from "../../Components/Tabs";
+import { LocationState } from "./types";
 
-type LocationState = {
-  searchElement: string;
-};
+
 const TABS = [
   {
     key: TabsNames.Articles,
@@ -46,19 +45,15 @@ const Search = () => {
 
   const searchedPosts = useSelector(PostsSelectors.getSearchedPosts);
 
-  const searchedPostsCount = useSelector(PostsSelectors.getSearchedPostsCount);
   const isSearchPostsLoading = useSelector(
     PostsSelectors.getSearchedPostsLoading
   );
-  const [page, setPage] = useState(DEFAULT_PAGE_NUMBER);
+
   const activeTab = useSelector(PostsSelectors.getActiveTab);
 
   const isNews = activeTab === TabsNames.News;
 
-  // const searchString = useSelector(
-  //   PostsSelectors.getSearchString
-  // );
-  // !! для поиска по буквенно
+
   useEffect(() => {
     if (searchElement.length === 0) {
       navigate(PathNames.Home);
@@ -66,28 +61,24 @@ const Search = () => {
   }, [searchElement]);
 
   useEffect(() => {
-  const _start = (page - 1) * PER_PAGE;
+
 
     isNews
       ? dispatch(
           searchForNews({
             title_contains: searchElement,
-            _start,
-            isOverwrite: false
+            _start: 0,
+
           })
         )
       : dispatch(
           searchForPosts({
             title_contains: searchElement,
-            _start,
-            isOverwrite: false
+            _start: 0,
           })
         );
-  }, [page, isNews]);
+  }, [isNews]);
 
-  const onScroll = () => {
-    setPage(prevPage => prevPage + 1);
-  };
 
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1);
@@ -110,8 +101,6 @@ const Search = () => {
         <div>
           <SearchList
             searchedPosts={searchedPosts}
-            count={searchedPostsCount}
-            onScroll={onScroll}
           />
           <SinglePostModal />
           <SingleImgModal />

@@ -15,7 +15,7 @@ import {
 import { Ellipsis } from "../../Assets/Icons";
 
 const CardPost: FC<CardPostProps> = ({ post }) => {
-  const { imageUrl, text, publishedAt, title, id } = post;
+  const { imageUrl, publishedAt, title, id } = post;
   const { theme } = useThemeContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();

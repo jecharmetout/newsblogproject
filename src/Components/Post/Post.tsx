@@ -1,16 +1,18 @@
 import React, { FC } from "react";
-// import { useParams } from "react-router-dom";
+import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+
+
 
 import styles from "./Post.module.css";
-import classNames from "classnames";
 import { PostProps } from "./types";
 
 import { Ellipsis, FacebookIcon, TwitterIcon } from "../../Assets/Icons";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { PathNames } from "../../Pages/Router/Router";
-import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonType } from "../Button";
-import { useDispatch } from "react-redux";
 import { setSelectedPost, setSinglePostModalVisible } from "../../Redux/reducers/postsReducer";
 
 const Post: FC<PostProps> = ({ post }) => {
@@ -18,9 +20,6 @@ const Post: FC<PostProps> = ({ post }) => {
 
   const { theme } = useThemeContext();
   const dispatch = useDispatch();
-
-  // const params = useParams()
-  // console.log(params)
 
   const navigate = useNavigate();
 
@@ -33,7 +32,6 @@ const Post: FC<PostProps> = ({ post }) => {
   };
 
   return (
-    <>
       <div
         className={classNames(styles.post, {
           [styles.darkContainer]: theme === Theme.Dark
@@ -74,7 +72,7 @@ const Post: FC<PostProps> = ({ post }) => {
           </div>
         </div>
       </div>
-    </>
+
   );
 };
 export default Post;

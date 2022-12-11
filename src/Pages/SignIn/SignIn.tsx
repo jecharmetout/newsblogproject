@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
 
 import styles from "./SignIn.module.css";
 import classNames from "classnames";
@@ -10,7 +9,6 @@ import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { PathNames } from "../../Pages/Router";
-// import { authUser } from "../../Redux/reducers/authReducer";
 
 const validateEmail = (email: string) => {
   return String(email)
@@ -21,7 +19,7 @@ const validateEmail = (email: string) => {
 };
 
 const SignIn = () => {
-  //   const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
@@ -62,9 +60,7 @@ const SignIn = () => {
     navigate(PathNames.Home);
   };
 
-  //   const onSignIn = () => {
-  //     dispatch(authUser({ email, password }));
-  //   };
+
 
   return (
     <div
@@ -114,14 +110,12 @@ const SignIn = () => {
           <Button
             type={ButtonType.Primary}
             title={"Sign In"}
-            // onClick={onSignIn}
             className={styles.signInBtn}
             disabled={false}
           />
         </div>
 
         <div className={styles.haveAccount}>
-          {/* Don’t have an account? <a>Sign Up</a> */}
           Don’t have an account? <Link to={PathNames.SignUp}>Sign Up</Link>
         </div>
       </div>
